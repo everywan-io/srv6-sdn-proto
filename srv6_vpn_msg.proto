@@ -1,0 +1,129 @@
+syntax = "proto3";
+
+/* This proto file contains several message types used by other proto files */
+
+
+/* Intent represents the description of a VPN to be created 
+ * A VPN has a name, a list of interfaces and an identifier for the tenant */
+message Intent {
+  string name = 1;
+  repeated Interface interfaces = 2;
+  string tenantid = 3;
+}
+
+/* An interface has an identifier of the router on which the interface is placed,
+ * a name, an IP prefix and an IP address taken from a private addressing space */
+message Interface {
+  string routerid = 1;
+  string name = 2;
+  string prefix = 3;
+  string ipaddr = 4;
+}
+
+/* CreateVPNRequest represents the request to create a new VPN
+ * A VPN has a name, an identifier for the routing table and a segment identifier (SID) */
+message CreateVPNRequest {
+  string name = 1;
+  string tableid = 2;
+  string sid = 3;
+}
+
+/* AddLocalInterfaceToVPNRequest represents the request 
+ * to add a local interface to an existing VPN in a router */
+message AddLocalInterfaceToVPNRequest {
+  string name = 1;
+  string interface = 2;
+  string ipaddr = 3;
+}
+
+/* RemoveLocalInterfaceFromVPNRequest represents the request 
+ * to remove a local interface from an existing VPN in a router */
+message RemoveLocalInterfaceFromVPNRequest {
+  string interface = 1;	
+}
+
+/* AddRemoteInterfaceToVPNRequest represents the request 
+ * to add a remote interface to an existing VPN in a router */
+message AddRemoteInterfaceToVPNRequest {
+  string interface = 1;
+  string tableid = 2;
+  string sid = 3;
+}
+
+/* RemoveRemoteInterfaceFromVPNRequest represents the request 
+ * to remove a remote interface from an existing VPN in a router */
+message RemoveRemoteInterfaceFromVPNRequest {
+  string interface = 1;
+  string tableid = 2;
+}
+
+/* AddInterfaceToVPNRequest represents the request 
+ * to add an interface to an existing VPN */
+message AddInterfaceToVPNRequest {
+  string name = 1;
+  Interface interface = 2;
+  string tenantid = 3;
+}
+
+/* RemoveInterfaceFromVPNRequest represents the request 
+ * to remove an interface from an existing VPN */
+message RemoveInterfaceFromVPNRequest {
+  string name = 1;
+  string routerid = 2;
+  string interface = 3;	
+  string tenantid = 4;
+}
+
+/* RemoveVPNRequest represents the request to remove an existing VPN */
+message RemoveVPNRequest {
+  string name = 1;
+  string tableid = 2;
+  string sid = 3;
+}
+
+/* Reports the outcome of a gRPC request command */
+message SRv6VPNReply {
+  string message = 1;
+}
+
+/* SRv6VPNList represents a response message containing the list of the VPNs */
+message SRv6VPNList {
+  repeated VPN vpns = 1;
+}
+
+/* VPN */
+message VPN {
+  string name = 1;
+  string tableid = 2;
+  repeated string interfaces = 3;
+  string sid = 4;
+}
+
+/* RemoveInterfaceFromVPNRequest represents the request 
+ * to remove an existing VPN */
+message RemoveVPNByNameRequest {
+  string name = 1;
+  string tenantid = 2;
+}
+
+/* Empty request message, used by methods that don't require any request message */
+message EmptyRequest {
+
+}
+
+/* NetlinkNotification represents a response message containing a netlink notification */
+message NetlinkNotification {
+    map<string, string> nlmsg = 1;
+}
+
+/* List of interfaces */
+message InterfacesList {
+  repeated InterfaceInfo interface = 1;
+}
+
+/* Information about a specific interface */
+message InterfaceInfo {
+  string name = 1;
+  string macaddr = 2;
+  repeated string ipaddr = 3;
+}

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+/* Import message types */
+import "srv6_vpn_msg.proto";
+
+/* RPC methods implementing a southbound interface for SRv6-VPN use cases */
+
+service SRv6SouthboundVPN {
+  // Get all the VPNs in a router
+  rpc GetVPNs (EmptyRequest) returns (SRv6VPNList) {}
+  // Create a new VPN in a router starting from a request provided by an SDN controller
+  rpc CreateVPN (CreateVPNRequest) returns (SRv6VPNReply) {}
+  // Add an interface local to a router to an existing VPN
+  rpc AddLocalInterfaceToVPN (AddLocalInterfaceToVPNRequest) returns (SRv6VPNReply) {}
+  // Remove an interface local to a router from an existing VPN
+  rpc RemoveLocalInterfaceFromVPN (RemoveLocalInterfaceFromVPNRequest) returns (SRv6VPNReply) {}
+  // Add an interface remote to a router to an existing VPN
+  rpc AddRemoteInterfaceToVPN (AddRemoteInterfaceToVPNRequest) returns (SRv6VPNReply) {}
+  // Remove an interface remote to a router to an existing VPN
+  rpc RemoveRemoteInterfaceFromVPN (RemoveRemoteInterfaceFromVPNRequest) returns (SRv6VPNReply) {}
+  // Remove an existing VPN
+  rpc RemoveVPN (RemoveVPNRequest) returns (SRv6VPNReply) {}
+  // Remove all the existing VPNs
+  rpc FlushVPNs (EmptyRequest) returns (SRv6VPNReply) {}
+  // Allow a SDN controller to receive Netlink notifications from a router
+  rpc SubscribeNetlinkNotifications (EmptyRequest) returns (stream NetlinkNotification) {}
+  // Get all the interfaces of a router
+  rpc GetInterfaces (EmptyRequest) returns (InterfacesList) {}
+}
