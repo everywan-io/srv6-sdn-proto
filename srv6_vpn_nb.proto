@@ -6,6 +6,8 @@ import "srv6_vpn_msg.proto";
 /* RPC methods implementing a northbound interface for SRv6-VPN use cases */
 
 service SRv6NorthboundVPN {
+  // Get all the VPNs in a router
+  rpc GetVPNs (EmptyRequest) returns (SRv6VPNList) {}
   // Create a new VPN starting from an intent provided by an application on the northbound interface
   rpc CreateVPN (Intent) returns (SRv6VPNReply) {}
   // Add an interface to an existing VPN
