@@ -8,7 +8,7 @@ syntax = "proto3";
 message Intent {
   string name = 1;
   repeated Interface interfaces = 2;
-  string tenantid = 3;
+  uint32 tenantid = 3;
 }
 
 /* An interface has an identifier of the router on which the interface is placed,
@@ -24,7 +24,7 @@ message Interface {
  * A VPN has a name, an identifier for the routing table and a segment identifier (SID) */
 message CreateVPNRequest {
   string name = 1;
-  string tableid = 2;
+  uint32 tableid = 2;
   string sid = 3;
 }
 
@@ -46,7 +46,7 @@ message RemoveLocalInterfaceFromVPNRequest {
  * to add a remote interface to an existing VPN in a router */
 message AddRemoteInterfaceToVPNRequest {
   string interface = 1;
-  string tableid = 2;
+  uint32 tableid = 2;
   string sid = 3;
 }
 
@@ -54,7 +54,7 @@ message AddRemoteInterfaceToVPNRequest {
  * to remove a remote interface from an existing VPN in a router */
 message RemoveRemoteInterfaceFromVPNRequest {
   string interface = 1;
-  string tableid = 2;
+  uint32 tableid = 2;
 }
 
 /* AddInterfaceToVPNRequest represents the request 
@@ -62,7 +62,7 @@ message RemoveRemoteInterfaceFromVPNRequest {
 message AddInterfaceToVPNRequest {
   string name = 1;
   Interface interface = 2;
-  string tenantid = 3;
+  uint32 tenantid = 3;
 }
 
 /* RemoveInterfaceFromVPNRequest represents the request 
@@ -71,13 +71,13 @@ message RemoveInterfaceFromVPNRequest {
   string name = 1;
   string routerid = 2;
   string interface = 3;	
-  string tenantid = 4;
+  uint32 tenantid = 4;
 }
 
 /* RemoveVPNRequest represents the request to remove an existing VPN */
 message RemoveVPNRequest {
   string name = 1;
-  string tableid = 2;
+  uint32 tableid = 2;
   string sid = 3;
 }
 
@@ -94,7 +94,7 @@ message SRv6VPNList {
 /* VPN */
 message VPN {
   string name = 1;
-  string tableid = 2;
+  uint32 tableid = 2;
   repeated string interfaces = 3;
   string sid = 4;
 }
@@ -103,7 +103,7 @@ message VPN {
  * to remove an existing VPN */
 message RemoveVPNByNameRequest {
   string name = 1;
-  string tenantid = 2;
+  uint32 tenantid = 2;
 }
 
 /* Empty request message, used by methods that don't require any request message */
