@@ -6,24 +6,23 @@ syntax = "proto3";
 /* Intent represents the description of a VPN to be created 
  * A VPN has a name, a list of interfaces and an identifier for the tenant */
 message Intent {
-  string name = 1;
+  string vpn_name = 1;
   repeated Interface interfaces = 2;
   uint32 tenantid = 3;
 }
 
 /* An interface has an identifier of the router on which the interface is placed,
- * a name, an IP prefix and an IP address taken from a private addressing space */
+ * a name an IP address taken from a private addressing space */
 message Interface {
-  string routerid = 1;
-  string name = 2;
-  string prefix = 3;
-  string ipaddr = 4;
+  string router = 1;
+  string ifname = 2;
+  repeated IPAddress ipaddrs = 3;
 }
 
 /* CreateVPNRequest represents the request to create a new VPN
  * A VPN has a name, an identifier for the routing table and a segment identifier (SID) */
 message CreateVPNRequest {
-  string name = 1;
+  string vpn_name = 1;
   uint32 tableid = 2;
   string sid = 3;
 }
@@ -31,36 +30,38 @@ message CreateVPNRequest {
 /* AddLocalInterfaceToVPNRequest represents the request 
  * to add a local interface to an existing VPN in a router */
 message AddLocalInterfaceToVPNRequest {
-  string name = 1;
-  string interface = 2;
-  string ipaddr = 3;
+  string vpn_name = 1;
+  string ifname = 2;
 }
 
 /* RemoveLocalInterfaceFromVPNRequest represents the request 
  * to remove a local interface from an existing VPN in a router */
 message RemoveLocalInterfaceFromVPNRequest {
-  string interface = 1;	
+  string vpn_name = 1;
+  string ifname = 2;
 }
 
 /* AddRemoteInterfaceToVPNRequest represents the request 
  * to add a remote interface to an existing VPN in a router */
 message AddRemoteInterfaceToVPNRequest {
-  string interface = 1;
-  uint32 tableid = 2;
-  string sid = 3;
+  string vpn_name = 1;
+  string interface = 2;
+  uint32 tableid = 3;
+  string sid = 4;
 }
 
 /* RemoveRemoteInterfaceFromVPNRequest represents the request 
  * to remove a remote interface from an existing VPN in a router */
 message RemoveRemoteInterfaceFromVPNRequest {
-  string interface = 1;
-  uint32 tableid = 2;
+  string vpn_name = 1;
+  string interface = 2;
+  uint32 tableid = 3;
 }
 
 /* AddInterfaceToVPNRequest represents the request 
  * to add an interface to an existing VPN */
 message AddInterfaceToVPNRequest {
-  string name = 1;
+  string vpn_name = 1;
   Interface interface = 2;
   uint32 tenantid = 3;
 }
@@ -68,15 +69,14 @@ message AddInterfaceToVPNRequest {
 /* RemoveInterfaceFromVPNRequest represents the request 
  * to remove an interface from an existing VPN */
 message RemoveInterfaceFromVPNRequest {
-  string name = 1;
-  string routerid = 2;
-  string interface = 3;	
-  uint32 tenantid = 4;
+  string vpn_name = 1;
+  Interface interface = 2;
+  uint32 tenantid = 3;
 }
 
 /* RemoveVPNRequest represents the request to remove an existing VPN */
 message RemoveVPNRequest {
-  string name = 1;
+  string vpn_name = 1;
   uint32 tableid = 2;
   string sid = 3;
 }
@@ -93,37 +93,20 @@ message SRv6VPNList {
 
 /* VPN */
 message VPN {
-  string name = 1;
+  string vpn_name = 1;
   uint32 tableid = 2;
-  repeated string interfaces = 3;
-  string sid = 4;
+  repeated Interface interfaces = 3;
 }
 
 /* RemoveInterfaceFromVPNRequest represents the request 
  * to remove an existing VPN */
 message RemoveVPNByNameRequest {
-  string name = 1;
+  string vpn_name = 1;
   uint32 tenantid = 2;
 }
 
-/* Empty request message, used by methods that don't require any request message */
-message EmptyRequest {
-
-}
-
-/* NetlinkNotification represents a response message containing a netlink notification */
-message NetlinkNotification {
-    map<string, string> nlmsg = 1;
-}
-
-/* List of interfaces */
-message InterfacesList {
-  repeated InterfaceInfo interface = 1;
-}
-
-/* Information about a specific interface */
-message InterfaceInfo {
-  string name = 1;
-  string macaddr = 2;
-  repeated string ipaddr = 3;
+/* IP address and subnet associated to a VPN interface */
+message IPAddress {
+  string ip = 1;
+  string net = 2;
 }
