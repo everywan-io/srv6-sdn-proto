@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+// The InterfaceRequest message containing a number of interfaces.
+message InterfaceRequest {
+  repeated Interface interfaces = 1;
+}
+
+// The Interface message encodes a interface request
+message Interface {
+  // Interface index
+  uint32 index = 1;
+  // Interface name
+  string name = 2;
+  // MAC address
+  string macaddr = 3;
+  // IP address
+  repeated string ipaddrs = 4;
+  // State (e.g. UP, DOWN)
+  string state = 5;
+  // OSPF advertisements
+  bool ospf_adv = 6;
+}

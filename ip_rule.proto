@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+// The IPRuleRequest message containing a number of rules.
+message IPRuleRequest {
+  repeated Rule rules = 1;
+}
+
+// The Rule message encodes a rule request
+message Rule {
+  // Rule's family
+  int32 family = 1;
+  // Routing table
+  int32 table = 2;
+  // Priority
+  int32 priority = 3;
+  // Type of rule
+  string action = 4;
+  // Routing scope
+  int32 scope = 5;
+  // IP for Destination Based (Policy Based) routing’s rule
+  string destination = 6;
+  // Mask for Destination Based (Policy Based) routing’s rule
+  int32 dst_len = 7;
+  // IP for Source Based (Policy Based) routing’s rule
+  string source = 8;
+  // Mask for Source Based (Policy Based) routing’s rule
+  int32 src_len = 9;
+  // Input interface for Interface Based (Policy Based) routing’s rule
+  string in_interface = 10;
+  // Output interface for Interface Based (Policy Based) routing’s rule
+  string out_interface = 11;
+}

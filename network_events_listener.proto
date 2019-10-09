@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "empty_req.proto";
+
+/* Define the rpc service interface */
+service NetworkEventsListener {
+  // Start listening operation
+  rpc Listen (EmptyRequest) returns (stream NetworkEvent) {}
+}
+
+/* The NetworkEvent message reporting the event catched by the node */
+message NetworkEvent {
+
+  /* Interface entity */
+  message Interface {
+    int32 index = 1;
+    string name = 2;
+    string macaddr = 3;
+    string ipaddr = 4;
+  }
+
+  /* The type of the event that has been catched */
+  enum EventType {
+    CONNECTION_ESTABLISHED = 0;
+    INTF_UP = 1;
+    INTF_DOWN = 2;
+    INTF_DEL = 3;
+    NEW_ADDR = 4;
+    DEL_ADDR = 5;
+  }
+
+  EventType type = 1;
+  Interface interface = 2;  
+}

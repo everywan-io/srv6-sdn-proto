@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+// The SRv6LPFRequest message containing a number of functions.
+message SRv6LPFRequest {
+  repeated LocalFunction functions = 1;
+}
+
+// The Function message encodes a function request
+message LocalFunction {
+  // Active segment to match
+  string segment = 1;
+  // Action to perform
+  string action = 2;
+   // Nexthop
+  string nexthop = 3;
+  // Routing table
+  int32 table = 4;
+  // Interface
+  string interface = 5;
+  // SRv6 Segment
+  message SRv6Segment {
+    string segment = 1;
+  }
+  // A collection of SRv6 Segments
+  repeated SRv6Segment segs = 6;
+  // Non-loopback device
+  string device = 7;
+  // Local SID table
+  int32 localsid_table = 8;
+}
