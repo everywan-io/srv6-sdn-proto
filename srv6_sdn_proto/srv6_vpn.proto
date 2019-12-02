@@ -10,25 +10,29 @@ service SRv6VPN {
   // Get all the VPNs in a router
   rpc GetVPNs (EmptyRequest) returns (SRv6VPNReply) {}
   // Create a new VPN starting from an intent provided by an application on the northbound interface
-  rpc CreateVPN (CreateVPNRequest) returns (SRv6VPNReply) {}
+  rpc CreateVPN (SRv6VPNRequest) returns (SRv6VPNReply) {}
   // Add an interface to an existing VPN
-  rpc AssignInterfaceToVPN (AssignInterfaceToVPNRequest) returns (SRv6VPNReply) {}
+  rpc AssignInterfaceToVPN (SRv6VPNRequest) returns (SRv6VPNReply) {}
   // Remove an interface to an existing VPN
-  rpc RemoveInterfaceFromVPN (RemoveInterfaceFromVPNRequest) returns (SRv6VPNReply) {}
+  rpc RemoveInterfaceFromVPN (SRv6VPNRequest) returns (SRv6VPNReply) {}
   // Remove an existing VPN
-  rpc RemoveVPN (RemoveVPNRequest) returns (SRv6VPNReply) {}
+  rpc RemoveVPN (SRv6VPNRequest) returns (SRv6VPNReply) {}
 }
 
-message CreateVPNRequest {
-  /* Intent represents the description of a VPN to be created 
-   * A VPN has a name, a list of interfaces and an identifier for the tenant */
-  message Intent {
-    string vpn_name = 1;
-    VPNType vpn_type = 2;
-    repeated VPNInterface interfaces = 3;
-    uint32 tenantid = 4;
-  }
+/* Request message carrying the intent(s) */
+message SRv6VPNRequest {
   repeated Intent intents = 1;
+}
+
+/* Intent represents the description of a VPN to be created 
+ * A VPN has a name, a list of interfaces and an identifier for the tenant */
+message Intent {
+  string vpn_name = 1;
+  VPNType vpn_type = 2;
+  repeated VPNInterface interfaces = 3;
+  uint32 tenantid = 4;
+  TunnelType tunnel = 5;
+  TunnelType encap = 6;
 }
 
 /* An interface has an identifier of the router on which the interface is placed,
@@ -38,28 +42,6 @@ message VPNInterface {
   string interface_name = 2;
   string interface_ip = 3;
   string vpn_prefix = 4;
-}
-
-/* AssignInterfaceToVPNRequest represents the request 
- * to add an interface to an existing VPN */
-message AssignInterfaceToVPNRequest {
-  string vpn_name = 1;
-  repeated VPNInterface interfaces = 2;
-  uint32 tenantid = 3;
-}
-
-/* RemoveInterfaceFromVPNRequest represents the request 
- * to remove an interface from an existing VPN */
-message RemoveInterfaceFromVPNRequest {
-  string vpn_name = 1;
-  repeated VPNInterface interfaces = 2;
-  uint32 tenantid = 3;
-}
-
-/* RemoveVPNRequest represents the request to remove an existing VPN */
-message RemoveVPNRequest {
-  string vpn_name = 1;
-  uint32 tenantid = 2;
 }
 
 /* Reports the outcome of a gRPC request command */
@@ -80,4 +62,12 @@ enum VPNType {
   L2VPN = 0;
   IPv4VPN = 1;
   IPv6VPN = 2;
+}
+
+/* Tunnel type */
+enum TunnelType {
+  SRv6 = 0;
+  IPsec_ESP_GRE = 1;
+  SRv6_IPsec_ESP_GRE = 2;
+  SRv6_IPsec_ESP_IP = 3;
 }
