@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "empty_req.proto";
+import "srv6_sdn_proto/empty_req.proto";
 
 /* Define the rpc service interface */
 service NetworkEventsListener {

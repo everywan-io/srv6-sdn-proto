@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-import "empty_req.proto";
-import "status_codes.proto";
+import "srv6_sdn_proto/empty_req.proto";
+import "srv6_sdn_proto/status_codes.proto";
 
 
 /* RPC methods implementing a northbound interface for SRv6-VPN use cases */

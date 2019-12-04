@@ -18,28 +18,16 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-#class PostInstallCommand(install):
-#    """Post-installation for installation mode."""
-#    def run(self):
-#        generate_proto()
-#        install.run(self)
         
-def generate_proto():
-    # Generate python grpc stubs from proto files
-    proto_files = glob.glob("srv6_sdn_proto/*.proto")
+open('./srv6_sdn_proto/__init__.py', 'a').close()
+# Generate python grpc stubs from proto files
 
-    print('Generation of python grpc stubs')
-    print(proto_files)
-    for file in proto_files:
-        args = "--proto_path=./srv6_sdn_proto --python_out=./srv6_sdn_proto --grpc_python_out=./srv6_sdn_proto {0}".format(file)
-        result = subprocess.call("%s -m grpc_tools.protoc %s" % (PYTHON_PATH, args), shell=True)
-        print("grpc generation result for '{0}': code {1}".format(file, result))
-        if result != 0:
-            exit(-1)
+print('Generation of python gRPC stubs')
+args = "-I. --proto_path=./srv6_sdn_proto --python_out=. --grpc_python_out=. srv6_sdn_proto/*.proto"
+result = subprocess.call("%s -m grpc_tools.protoc %s" % (PYTHON_PATH, args), shell=True)
+if result != 0:
+    exit(-1)
 
-#os.mknod("srv6_sdn_proto/__init__.py")
-
-generate_proto()
 
 install_requires = [
     'grpcio>=1.21.0',
@@ -58,6 +46,8 @@ setup(
     long_description_content_type='text/markdown',  # Optional (see note above)
     url='',  # Optional
     packages=['srv6_sdn_proto'],  # Required
+    #packages=['grpc_stubs', 'grpc_stubs/proto'],  # Required
+    #package_dir={'grpc_stubs': 'grpc_stubs/proto'},
     install_requires=install_requires,
     #cmdclass={
     #    'install': PostInstallCommand,

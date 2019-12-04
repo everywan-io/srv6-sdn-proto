@@ -2,14 +2,14 @@ syntax = "proto3";
 
 package srv6_manager;
 
-import "srv6_explicit_path.proto";
-import "srv6_local_processing_function.proto";
-import "ip_addr.proto";
-import "ip_route.proto";
-import "ip_rule.proto";
-import "vrf_device.proto";
-import "interface.proto";
-import "status_codes.proto";
+import "srv6_sdn_proto/srv6_explicit_path.proto";
+import "srv6_sdn_proto/srv6_local_processing_function.proto";
+import "srv6_sdn_proto/ip_addr.proto";
+import "srv6_sdn_proto/ip_route.proto";
+import "srv6_sdn_proto/ip_rule.proto";
+import "srv6_sdn_proto/vrf_device.proto";
+import "srv6_sdn_proto/interface.proto";
+import "srv6_sdn_proto/status_codes.proto";
 
 // Define the rpc service interface
 service SRv6Manager {
