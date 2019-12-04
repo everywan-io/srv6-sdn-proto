@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+import "srv6_sdn_proto/interface.proto";
+import "srv6_sdn_proto/status_codes.proto";
+
+/* RPC methods implementing a northbound interface for device management */
+
+service InventoryService {
+    // Get devices information
+    rpc GetDeviceInformation(InventoryServiceRequest) returns (InventoryServiceReply) {}
+    // Get topology information
+    rpc GetTopologyInformation(InventoryServiceRequest) returns (InventoryServiceReply) {}
+    // Get tunnels
+    rpc GetTunnelInformation (InventoryServiceRequest) returns (InventoryServiceReply) {}
+}
+
+/* Request message carrying the device information */
+message InventoryServiceRequest {
+    repeated string ids = 1;
+}
+
+/* Device information */
+message DeviceInformation {
+    repeated Router devices = 1;
+}
+
+/* Device information */
+message Router {
+    string id = 1;
+    repeated Interface interfaces = 2;
+    string loopbackip = 3;
+    string loopbacknet = 4;
+    string managementip = 5;
+}
+
+/* Link */
+message Link {
+    string l_router = 1;
+    string r_router = 2;
+}
+
+/* Topology Information */
+message TopologyInformation {
+    repeated string routers = 1;
+    repeated Link links = 2;
+}
+
+/* Tunnel Interface */
+message TunnelInterface {
+  string routerid = 1;
+  string interface_name = 2;
+  string interface_ip = 3;
+  string site_prefix = 3;
+}
+
+/* Tunnel */
+message Tunnel {
+  string name = 1;
+  repeated TunnelInterface interfaces = 2;
+}
+
+/* Tunnel information */
+message TunnelInformation {
+    repeated Tunnel tunnels = 1;
+}
+
+/* Reply message */
+message InventoryServiceReply {
+    StatusCode status = 1;
+    DeviceInformation device_information = 2;
+    TopologyInformation topology_information = 3;
+    TunnelInformation tunnel_information = 4;
+}
