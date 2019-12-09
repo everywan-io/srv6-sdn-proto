@@ -32,7 +32,6 @@ message Intent {
   repeated VPNInterface interfaces = 3;
   uint32 tenantid = 4;
   TunnelType tunnel = 5;
-  TunnelType encap = 6;
 }
 
 /* An interface has an identifier of the router on which the interface is placed,
