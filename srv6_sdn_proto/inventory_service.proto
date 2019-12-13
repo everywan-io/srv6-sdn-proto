@@ -60,6 +60,7 @@ message Router {
     string loopbackip = 3;
     string loopbacknet = 4;
     string managementip = 5;
+    string mgmtip = 6;
 }
 
 /* Link */
