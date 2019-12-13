@@ -31,7 +31,13 @@ message Intent {
   VPNType vpn_type = 2;
   repeated VPNInterface interfaces = 3;
   uint32 tenantid = 4;
-  TunnelType tunnel = 5;
+  string tunnel = 5;
+  TunnelInfo tunnel_info = 6;
+  //TunnelType tunnel = 5;
+}
+
+message TunnelInfo {
+  
 }
 
 /* An interface has an identifier of the router on which the interface is placed,
@@ -64,9 +70,11 @@ enum VPNType {
 }
 
 /* Tunnel type */
+/*
 enum TunnelType {
   SRv6 = 0;
   IPsec_ESP_GRE = 1;
   SRv6_IPsec_ESP_GRE = 2;
   SRv6_IPsec_ESP_IP = 3;
 }
+*/
