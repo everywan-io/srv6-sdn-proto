@@ -9,6 +9,8 @@ import "srv6_sdn_proto/ip_route.proto";
 import "srv6_sdn_proto/ip_rule.proto";
 import "srv6_sdn_proto/vrf_device.proto";
 import "srv6_sdn_proto/interface.proto";
+import "srv6_sdn_proto/gre_interface.proto";
+import "srv6_sdn_proto/ip_neigh.proto";
 import "srv6_sdn_proto/status_codes.proto";
 
 // Define the rpc service interface
@@ -34,6 +36,8 @@ message SRv6ManagerRequest {
     IPRouteRequest iproute_request = 6;
     VRFDeviceRequest vrf_device_request = 7;
     InterfaceRequest interface_request = 8;
+    GREInterfaceRequest gre_interface_request = 9;
+    IPNeighRequest ipneigh_request = 10;
   }
 }
 
@@ -53,4 +57,6 @@ enum EntityType {
   IPRoute = 4;
   VRFDevice = 5;
   Interface = 6;
+  GREInterface = 7;
+  IPNeigh = 8;
 }

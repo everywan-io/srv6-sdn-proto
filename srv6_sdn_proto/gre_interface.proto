@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+// The InterfaceRequest message containing a number of GRE interfaces.
+message GREInterfaceRequest {
+  repeated GREInterface gre_interfaces = 1;
+}
+
+// The Interface message encodes a GRE interface request
+message GREInterface {
+  // Name of the GRE interface
+  string name = 1;
+  // Local address for tunneled packets
+  string local = 2;
+  // Remote endpoint of the tunnel
+  string remote = 3;
+}
