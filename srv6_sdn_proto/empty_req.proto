@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+
+/* Empty request message,
+used by methods that don't require any request message */
+message EmptyRequest {
+
+}

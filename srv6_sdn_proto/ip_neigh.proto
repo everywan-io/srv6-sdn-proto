@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+// The IPNeighRequest message containing a number of rules.
+message IPNeighRequest {
+  repeated Neigh neighs = 1;
+}
+
+// The Neigh message encodes a neigh request
+message Neigh {
+  // Family
+  uint32 family = 1;
+  // Address
+  string addr = 2;
+  // Link Layer address
+  string lladdr = 3;
+  // Device
+  string device = 4;
+}
