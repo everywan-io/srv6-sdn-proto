@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+// The VRFDeviceRequest message containing a number of devices.
+message VRFDeviceRequest {
+  repeated Device device = 1;
+}
+
+message VrfInterfaces{
+	// interface name 
+	string name = 1;
+}
+
+// The Path message encodes a path request
+message Device {
+  // Device name
+  string name = 1;
+  // Routing table associated to the VRF
+  uint32 table = 2;
+  //interfaces to be associeted with vrf
+  repeated VrfInterfaces interfaces = 3;  
+}

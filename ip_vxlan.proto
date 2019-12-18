@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+// The IPVxLANRequest message containing a number of vxlan.
+message IPVxLANRequest {
+  repeated Vxlan vxlan = 1;
+}
+
+// The VxLAN message encodes a vxlan request
+message Vxlan {
+  // VTEP interface name 
+  string ifname = 1;
+  // VxLAN link 
+  string vxlan_link = 2;
+  // VNI
+  uint32 vxlan_id = 3;
+}
