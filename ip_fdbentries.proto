@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+// The IPfdbentriesRequest message containing a number of fdb entries.
+message IPfdbentriesRequest {
+  repeated Fdbentries fdbentries = 1;
+}
+
+// The Fdbentries message encodes a fdb entry
+message Fdbentries {
+  // VxLAN interface   
+  string ifindex = 1;
+  // destination ip address 
+  string dst = 2;
+}

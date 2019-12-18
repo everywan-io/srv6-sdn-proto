@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+// The IPRouteRequest message containing a number of routes.
+message IPRouteRequest {
+  repeated Route route = 1;
+}
+
+// The Route message encodes a route request
+message Route {
+  // Type of service
+  string tos = 1;
+  // Type of route (e.g. unicast, local, etc.)
+  string type = 2;
+  // Routing table
+  int32 table = 3;
+  // Routing scope
+  int32 scope = 4;
+  // IP for Destination Based (Policy Based) routing’s rule
+  string destination = 5;
+  // Mask for Destination Based (Policy Based) routing’s rule
+  int32 dst_len = 6;
+  // IP for Source Based (Policy Based) routing’s rule
+  string preferred_source = 7;
+  // Mask for Source Based (Policy Based) routing’s rule
+  int32 src_len = 8;
+  // Input interface for Interface Based (Policy Based) routing’s rule
+  string in_interface = 9;
+  // Output interface for Interface Based (Policy Based) routing’s rule
+  string out_interface = 10;
+  // Via address
+  string gateway = 11;
+  // family 
+  int32 family = 12;
+  // proto 
+  int32 proto = 13;
+}
