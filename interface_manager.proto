@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+import "common.proto";
+
+/* RPC methods implementing a southbound interface for SRv6-VPN use cases */
+
+service InterfaceManager {
+  // Add an IPv6 address to a VPN interface
+  rpc AddIPv6AddressToInterface (AddIPAddressRequest) returns (InterfaceManagerReply) {}
+  // Remove an IPv6 address from a VPN interface
+  rpc RemoveIPv6AddressFromInterface (RemoveIPAddressRequest) returns (InterfaceManagerReply) {}
+  // Add an IPv4 address to a VPN interface
+  rpc AddIPv4AddressToInterface (AddIPAddressRequest) returns (InterfaceManagerReply) {}
+  // Remove an IPv4 address from a VPN interface
+  rpc RemoveIPv4AddressFromInterface (RemoveIPAddressRequest) returns (InterfaceManagerReply) {}
+  // Add an IP address to a VPN interface
+  rpc AddIPAddressToInterface (AddIPAddressRequest) returns (InterfaceManagerReply) {}
+  // Remove an IP address from a VPN interface
+  rpc RemoveIPAddressFromInterface (RemoveIPAddressRequest) returns (InterfaceManagerReply) {}
+  // Allow a SDN controller to receive Netlink notifications from a router
+  rpc SubscribeNetlinkNotifications (EmptyRequest) returns (stream NetlinkNotification) {}
+  // Get all the interfaces of a router
+  rpc GetInterfaces (EmptyRequest) returns (InterfacesList) {}
+}
+
+/* Reports the outcome of a gRPC request command */
+message InterfaceManagerReply {
+  string message = 1;
+}
+
+/* Add IP address request */
+message AddIPAddressRequest {
+  string ifname = 1;
+  string ipaddr = 2;
+}
+
+/* Remove IP address request */
+message RemoveIPAddressRequest {
+  string ifname = 1;
+  string ipaddr = 2;
+}
+
+/* NetlinkNotification represents a response message containing a netlink notification */
+message NetlinkNotification {
+    map<string, string> nlmsg = 1;
+}
+
+/* List of interfaces */
+message InterfacesList {
+    repeated InterfaceInfo interface = 1;
+}
+
+/* Information about a specific interface */
+message InterfaceInfo {
+    string ifname = 1;
+    string macaddr = 2;
+    repeated string ipaddr = 3;
+}
