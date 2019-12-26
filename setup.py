@@ -28,14 +28,6 @@ result = subprocess.call("%s -m grpc_tools.protoc %s" % (PYTHON_PATH, args), she
 if result != 0:
     exit(-1)
 
-
-install_requires = [
-    'grpcio>=1.21.0',
-    'grpcio-tools>=1.21.0',
-    'protobuf>=3.8.0',
-    'setuptools'
-]
-
 # Arguments marked as "Required" below must be included for upload to PyPI.
 # Fields marked as "Optional" may be commented out.
 setup(
@@ -46,10 +38,11 @@ setup(
     long_description_content_type='text/markdown',  # Optional (see note above)
     url='',  # Optional
     packages=['srv6_sdn_proto'],  # Required
-    #packages=['grpc_stubs', 'grpc_stubs/proto'],  # Required
-    #package_dir={'grpc_stubs': 'grpc_stubs/proto'},
-    install_requires=install_requires,
-    #cmdclass={
-    #    'install': PostInstallCommand,
-    #},
+    install_requires=[
+        'setuptools',
+        'grpcio>=1.19.0',
+        'grpcio-tools>=1.19.0',
+        'protobuf>=3.7.1',
+        'six>=1.12.0'
+    ]
 )
