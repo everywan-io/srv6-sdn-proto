@@ -13,4 +13,6 @@ message Vxlan {
   string vxlan_link = 2;
   // VNI
   uint32 vxlan_id = 3;
+  // vxlan destinantion port 
+  uint32 vxlan_port = 4;
 }
