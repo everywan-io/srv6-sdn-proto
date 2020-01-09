@@ -80,13 +80,16 @@ message TunnelInterface {
   string routerid = 1;
   string interface_name = 2;
   string interface_ip = 3;
-  string site_prefix = 4;
+  repeated string subnets = 4;
 }
 
 /* Tunnel */
 message Tunnel {
   string name = 1;
   repeated TunnelInterface interfaces = 2;
+  string type = 3;
+  string mode = 4;
+  uint32 tenantid = 5;
 }
 
 /* Tunnel information */
