@@ -13,4 +13,6 @@ message Device {
   int32 table = 2;
   // Interfaces
   repeated string interfaces = 3;
+  // Operation
+  string op = 4;
 }
