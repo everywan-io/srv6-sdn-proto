@@ -6,12 +6,19 @@ import "srv6_sdn_proto/status_codes.proto";
 /* RPC methods implementing a northbound interface for device management */
 
 service InventoryService {
+    // Configure device
+    rpc ConfigureDevice(ConfigureDeviceRequest) returns (InventoryServiceReply) {}
     // Get devices information
     rpc GetDeviceInformation(InventoryServiceRequest) returns (InventoryServiceReply) {}
     // Get topology information
     rpc GetTopologyInformation(InventoryServiceRequest) returns (InventoryServiceReply) {}
     // Get tunnels
     rpc GetTunnelInformation (InventoryServiceRequest) returns (InventoryServiceReply) {}
+}
+
+/* Request message carrying the device configuration */
+message ConfigureDeviceRequest {
+    DeviceInformation configuration = 1;
 }
 
 /* Request message carrying the device information */
@@ -53,6 +60,7 @@ message Router {
         repeated MACAddress mac_addrs = 2;
         repeated IPv4Address ipv4_addrs = 3;
         repeated IPv6Address ipv6_addrs = 4;
+        string type = 5;
     }
 
     string id = 1;
@@ -61,6 +69,9 @@ message Router {
     string loopbacknet = 4;
     string managementip = 5;
     string mgmtip = 6;
+    string name = 7;
+    string description = 8;
+    string status = 9;
 }
 
 /* Link */
