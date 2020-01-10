@@ -96,11 +96,12 @@ message TunnelInterface {
 
 /* Tunnel */
 message Tunnel {
-  string name = 1;
-  repeated TunnelInterface interfaces = 2;
-  string type = 3;
-  string mode = 4;
-  uint32 tenantid = 5;
+  string id = 1;
+  string name = 2;
+  repeated TunnelInterface interfaces = 3;
+  string type = 4;
+  string mode = 5;
+  uint32 tenantid = 6;
 }
 
 /* Tunnel information */
