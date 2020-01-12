@@ -60,7 +60,9 @@ message Router {
         repeated MACAddress mac_addrs = 2;
         repeated IPv4Address ipv4_addrs = 3;
         repeated IPv6Address ipv6_addrs = 4;
-        string type = 5;
+        repeated string ipv4_subnets = 5;
+        repeated string ipv6_subnets = 6;
+        string type = 7;
     }
 
     string id = 1;
@@ -90,8 +92,6 @@ message TopologyInformation {
 message TunnelInterface {
   string routerid = 1;
   string interface_name = 2;
-  string interface_ip = 3;
-  repeated string subnets = 4;
 }
 
 /* Tunnel */

@@ -45,8 +45,6 @@ message TunnelInfo {
 message VPNInterface {
   string routerid = 1;
   string interface_name = 2;
-  string interface_ip = 3;
-  repeated string subnets = 4;
 }
 
 /* Reports the outcome of a gRPC request command */
