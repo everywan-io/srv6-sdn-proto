@@ -45,6 +45,7 @@ message Router {
       string broadcast = 1;
       string addr = 2;
       string netmask = 3;
+      string ext_addr = 4;
     }
 
     /* IPv6 address */
@@ -52,6 +53,7 @@ message Router {
       string broadcast = 1;
       string addr = 2;
       string netmask = 3;
+      string ext_addr = 4;
     }
 
     /* Interface */
