@@ -105,6 +105,7 @@ message Tenant {
 message TenantReply {
   StatusCode status = 1;
   string token = 2;
+  uint32 tenantid = 3;
 }
 
 /* Remove Tenant */
