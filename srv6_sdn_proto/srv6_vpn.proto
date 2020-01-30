@@ -6,30 +6,30 @@ import "srv6_sdn_proto/status_codes.proto";
 
 /* RPC methods implementing a northbound interface for SRv6-VPN use cases */
 
-service SRv6VPN {
-  // Get all the VPNs in a router
-  rpc GetVPNs (EmptyRequest) returns (SRv6VPNReply) {}
-  // Create a new VPN starting from an intent provided by an application on the northbound interface
-  rpc CreateVPN (SRv6VPNRequest) returns (SRv6VPNReply) {}
-  // Add an interface to an existing VPN
-  rpc AssignInterfaceToVPN (SRv6VPNRequest) returns (SRv6VPNReply) {}
-  // Remove an interface to an existing VPN
-  rpc RemoveInterfaceFromVPN (SRv6VPNRequest) returns (SRv6VPNReply) {}
-  // Remove an existing VPN
-  rpc RemoveVPN (SRv6VPNRequest) returns (SRv6VPNReply) {}
+service OverlayService {
+  // Get all the overlays in a router
+  rpc GetOverlays (EmptyRequest) returns (OverlayServiceReply) {}
+  // Create a new overlay starting from an intent provided by an application on the northbound interface
+  rpc CreateOverlay (OverlayServiceRequest) returns (OverlayServiceReply) {}
+  // Add a slice to an existing overlay
+  rpc AssignSliceToOverlay (OverlayServiceRequest) returns (OverlayServiceReply) {}
+  // Remove an interface to an existing overlay
+  rpc RemoveSliceFromOverlay (OverlayServiceRequest) returns (OverlayServiceReply) {}
+  // Remove an existing overlay
+  rpc RemoveOverlay (OverlayServiceRequest) returns (OverlayServiceReply) {}
 }
 
 /* Request message carrying the intent(s) */
-message SRv6VPNRequest {
+message OverlayServiceRequest {
   repeated Intent intents = 1;
 }
 
 /* Intent represents the description of a VPN to be created 
  * A VPN has a name, a list of interfaces and an identifier for the tenant */
 message Intent {
-  string vpn_name = 1;
-  VPNType vpn_type = 2;
-  repeated VPNInterface interfaces = 3;
+  string overlay_name = 1;
+  VPNType overlay_type = 2;
+  repeated Slice slices = 3;
   uint32 tenantid = 4;
   string tunnel = 5;
   TunnelInfo tunnel_info = 6;
@@ -42,29 +42,29 @@ message TunnelInfo {
 
 /* An interface has an identifier of the router on which the interface is placed,
  * a name an IP address taken from a private addressing space */
-message VPNInterface {
+message Slice {
   string routerid = 1;
   string interface_name = 2;
 }
 
 /* Reports the outcome of a gRPC request command */
-message SRv6VPNReply {
+message OverlayServiceReply {
   StatusCode status = 1;
-  repeated VPN vpns = 2;
+  repeated Overlay overlays = 2;
 }
 
-/* VPN */
-message VPN {
-  string vpn_name = 1;
+/* Overlay */
+message Overlay {
+  string overlay_name = 1;
   uint32 tableid = 2;
-  repeated VPNInterface interfaces = 3;
+  repeated Slice slices = 3;
 }
 
-/* VPN type */
-enum VPNType {
+/* Overlay type */
+enum OverlayType {
   L2VPN = 0;
-  IPv4VPN = 1;
-  IPv6VPN = 2;
+  IPv4Overlay = 1;
+  IPv6Overlay = 2;
 }
 
 /* Tunnel type */
