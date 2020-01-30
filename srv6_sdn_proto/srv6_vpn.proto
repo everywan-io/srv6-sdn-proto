@@ -28,8 +28,8 @@ message OverlayServiceRequest {
  * A VPN has a name, a list of interfaces and an identifier for the tenant */
 message Intent {
   string overlay_name = 1;
-  VPNType overlay_type = 2;
-  repeated Slice slices = 3;
+  OverlayType overlay_type = 2;
+  repeated OverlaySlice slices = 3;
   uint32 tenantid = 4;
   string tunnel = 5;
   TunnelInfo tunnel_info = 6;
@@ -42,7 +42,7 @@ message TunnelInfo {
 
 /* An interface has an identifier of the router on which the interface is placed,
  * a name an IP address taken from a private addressing space */
-message Slice {
+message OverlaySlice {
   string routerid = 1;
   string interface_name = 2;
 }
@@ -50,14 +50,14 @@ message Slice {
 /* Reports the outcome of a gRPC request command */
 message OverlayServiceReply {
   StatusCode status = 1;
-  repeated Overlay overlays = 2;
+  repeated OverlayData overlays = 2;
 }
 
-/* Overlay */
-message Overlay {
+/* OverlayData */
+message OverlayData {
   string overlay_name = 1;
   uint32 tableid = 2;
-  repeated Slice slices = 3;
+  repeated OverlaySlice slices = 3;
 }
 
 /* Overlay type */
