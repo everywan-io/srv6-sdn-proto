@@ -12,8 +12,8 @@ service InventoryService {
     rpc GetDeviceInformation(InventoryServiceRequest) returns (InventoryServiceReply) {}
     // Get topology information
     rpc GetTopologyInformation(InventoryServiceRequest) returns (InventoryServiceReply) {}
-    // Get tunnels
-    rpc GetTunnelInformation (InventoryServiceRequest) returns (InventoryServiceReply) {}
+    // Get overlays
+    rpc GetOverlayInformation (InventoryServiceRequest) returns (InventoryServiceReply) {}
     // Configure Tenant 
     rpc ConfigureTenant(Tenant) returns (TenantReply) {}
     // Remove Tenant
