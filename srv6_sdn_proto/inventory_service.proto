@@ -74,25 +74,25 @@ message TopologyInformation {
     repeated Link links = 2;
 }
 
-/* Tunnel Interface */
-message TunnelInterface {
+/* Slice */
+message Slice {
   string routerid = 1;
   string interface_name = 2;
 }
 
-/* Tunnel */
-message Tunnel {
+/* Overlay */
+message Overlay {
   string id = 1;
   string name = 2;
-  repeated TunnelInterface interfaces = 3;
+  repeated Slice slices = 3;
   string type = 4;
   string mode = 5;
   uint32 tenantid = 6;
 }
 
-/* Tunnel information */
-message TunnelInformation {
-    repeated Tunnel tunnels = 1;
+/* Overlay information */
+message OverlayInformation {
+    repeated Overlay overlays = 1;
 }
 
 /* Tenant */
@@ -105,6 +105,7 @@ message Tenant {
 message TenantReply {
   StatusCode status = 1;
   string token = 2;
+  uint32 tenantid = 3;
 }
 
 /* Remove Tenant */
@@ -117,5 +118,5 @@ message InventoryServiceReply {
     StatusCode status = 1;
     DeviceInformation device_information = 2;
     TopologyInformation topology_information = 3;
-    TunnelInformation tunnel_information = 4;
+    OverlayInformation overlay_information = 4;
 }
