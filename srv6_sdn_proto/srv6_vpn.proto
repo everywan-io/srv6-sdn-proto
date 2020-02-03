@@ -6,9 +6,19 @@ import "srv6_sdn_proto/status_codes.proto";
 
 /* RPC methods implementing a northbound interface for SRv6-VPN use cases */
 
-service OverlayService {
-  // Get all the overlays in a router
+service NorthboundInterface {
+  // Configure device
+  rpc ConfigureDevice(ConfigureDeviceRequest) returns (InventoryServiceReply) {}
+  // Get devices information
+  rpc GetDevices(InventoryServiceRequest) returns (InventoryServiceReply) {}
+  // Get topology information
+  rpc GetTopologyInformation(InventoryServiceRequest) returns (InventoryServiceReply) {}
+  // Get overlays
   rpc GetOverlays (EmptyRequest) returns (OverlayServiceReply) {}
+  // Configure Tenant 
+  rpc ConfigureTenant(Tenant) returns (TenantReply) {}
+  // Remove Tenant
+  rpc RemoveTenant(RemoveTenantRequest) returns (InventoryServiceReply) {}
   // Create a new overlay starting from an intent provided by an application on the northbound interface
   rpc CreateOverlay (OverlayServiceRequest) returns (OverlayServiceReply) {}
   // Add a slice to an existing overlay
@@ -27,13 +37,14 @@ message OverlayServiceRequest {
 /* Intent represents the description of a VPN to be created 
  * A VPN has a name, a list of interfaces and an identifier for the tenant */
 message Intent {
-  string overlay_name = 1;
-  OverlayType overlay_type = 2;
-  repeated OverlaySlice slices = 3;
-  uint32 tenantid = 4;
-  string tunnel = 5;
-  TunnelInfo tunnel_info = 6;
-  //TunnelType tunnel = 5;
+  string overlayid = 1;
+  string overlay_name = 2;
+  OverlayType overlay_type = 3;
+  repeated OverlaySlice slices = 4;
+  uint32 tenantid = 5;
+  string tunnel = 6;
+  TunnelInfo tunnel_info = 7;
+  //TunnelType tunnel = 8;
 }
 
 message TunnelInfo {
@@ -43,7 +54,7 @@ message TunnelInfo {
 /* An interface has an identifier of the router on which the interface is placed,
  * a name an IP address taken from a private addressing space */
 message OverlaySlice {
-  string routerid = 1;
+  string deviceid = 1;
   string interface_name = 2;
 }
 
@@ -76,3 +87,124 @@ enum TunnelType {
   SRv6_IPsec_ESP_IP = 3;
 }
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Request message carrying the device configuration */
+message ConfigureDeviceRequest {
+    DeviceInformation configuration = 1;
+}
+
+/* Request message carrying the device information */
+message InventoryServiceRequest {
+    repeated string deviceids = 1;
+    int32 tenantid = 2;
+}
+
+/* Device information */
+message DeviceInformation {
+    repeated Router devices = 1;
+}
+
+/* Device information */
+message Router {
+
+    /* Interface */
+    message Interface {
+        string name = 1;
+        string mac_addr = 2;
+        repeated string ipv4_addrs = 3;
+        repeated string ipv6_addrs = 4;
+        repeated string ipv4_subnets = 5;
+        repeated string ipv6_subnets = 6;
+        repeated string ext_ipv4_addrs = 7;
+        repeated string ext_ipv6_addrs = 8;
+        string type = 9;
+    }
+
+    string id = 1;
+    repeated Interface interfaces = 2;
+    string loopbackip = 3;
+    string loopbacknet = 4;
+    string managementip = 5;
+    string mgmtip = 6;
+    string name = 7;
+    string description = 8;
+    string status = 9;
+}
+
+/* Link */
+message Link {
+    string l_router = 1;
+    string r_router = 2;
+}
+
+/* Topology Information */
+message TopologyInformation {
+    repeated string routers = 1;
+    repeated Link links = 2;
+}
+
+/* Slice */
+message Slice {
+  string routerid = 1;
+  string interface_name = 2;
+}
+
+/* Overlay */
+message Overlay {
+  string id = 1;
+  string name = 2;
+  repeated Slice slices = 3;
+  string type = 4;
+  string mode = 5;
+  uint32 tenantid = 6;
+}
+
+/* Overlay information */
+message OverlayInformation {
+    repeated Overlay overlays = 1;
+}
+
+/* Tenant */
+message Tenant {
+  uint32 port = 1;
+  string info = 2;
+}
+
+/* Tenant Reply */
+message TenantReply {
+  StatusCode status = 1;
+  string token = 2;
+  uint32 tenantid = 3;
+}
+
+/* Remove Tenant */
+message RemoveTenantRequest {
+  string token = 1;
+}
+
+/* Reply message */
+message InventoryServiceReply {
+    StatusCode status = 1;
+    DeviceInformation device_information = 2;
+    TopologyInformation topology_information = 3;
+    OverlayInformation overlay_information = 4;
+}
