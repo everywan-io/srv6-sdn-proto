@@ -14,7 +14,7 @@ service NorthboundInterface {
   // Get topology information
   rpc GetTopologyInformation(InventoryServiceRequest) returns (InventoryServiceReply) {}
   // Get overlays
-  rpc GetOverlays (EmptyRequest) returns (OverlayServiceReply) {}
+  rpc GetOverlays (InventoryServiceRequest) returns (OverlayServiceReply) {}
   // Configure Tenant 
   rpc ConfigureTenant(Tenant) returns (TenantReply) {}
   // Remove Tenant
@@ -114,8 +114,9 @@ message ConfigureDeviceRequest {
 
 /* Request message carrying the device information */
 message InventoryServiceRequest {
-    repeated string deviceids = 1;
-    int32 tenantid = 2;
+    repeated string overlayids = 1;
+    repeated string deviceids = 2;
+    int32 tenantid = 3;
 }
 
 /* Device information */
