@@ -149,7 +149,7 @@ message Router {
     string name = 7;
     string description = 8;
     string status = 9;
-    string tenantid = 10;
+    int32 tenantid = 10;
 }
 
 /* Link */
