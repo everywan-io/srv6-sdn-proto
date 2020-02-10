@@ -41,7 +41,7 @@ message Intent {
   string overlay_name = 2;
   OverlayType overlay_type = 3;
   repeated OverlaySlice slices = 4;
-  int32 tenantid = 5;
+  string tenantid = 5;
   string tunnel = 6;
   TunnelInfo tunnel_info = 7;
   //TunnelType tunnel = 8;
@@ -119,7 +119,7 @@ message ConfigureDeviceRequest {
 message InventoryServiceRequest {
     repeated string overlayids = 1;
     repeated string deviceids = 2;
-    int32 tenantid = 3;
+    string tenantid = 3;
 }
 
 /* Device information */
@@ -152,7 +152,7 @@ message Router {
     string name = 7;
     string description = 8;
     string status = 9;
-    int32 tenantid = 10;
+    string tenantid = 10;
 }
 
 /* Link */
@@ -180,7 +180,11 @@ message Overlay {
   repeated Slice slices = 3;
   string type = 4;
   string mode = 5;
+<<<<<<< HEAD
   int32 tenantid = 6;
+=======
+  string tenantid = 6;
+>>>>>>> 97b38133ad6fd3a8829a31c4464ceb8572bcf737
 }
 
 /* Overlay information */
@@ -198,7 +202,11 @@ message Tenant {
 message TenantReply {
   StatusCode status = 1;
   string token = 2;
+<<<<<<< HEAD
   int32 tenantid = 3;
+=======
+  string tenantid = 3;
+>>>>>>> 97b38133ad6fd3a8829a31c4464ceb8572bcf737
 }
 
 /* Remove Tenant */
