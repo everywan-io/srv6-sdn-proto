@@ -41,7 +41,7 @@ message Intent {
   string overlay_name = 2;
   OverlayType overlay_type = 3;
   repeated OverlaySlice slices = 4;
-  uint32 tenantid = 5;
+  int32 tenantid = 5;
   string tunnel = 6;
   TunnelInfo tunnel_info = 7;
   //TunnelType tunnel = 8;
@@ -67,8 +67,11 @@ message OverlayServiceReply {
 /* OverlayData */
 message OverlayData {
   string overlay_name = 1;
-  uint32 tableid = 2;
+  int32 tenantid = 2;
   repeated OverlaySlice slices = 3;
+  OverlayType overlay_type = 4;
+  string tunnel_mode = 5;
+  string overlayid = 6;
 }
 
 /* Overlay type */
@@ -177,7 +180,7 @@ message Overlay {
   repeated Slice slices = 3;
   string type = 4;
   string mode = 5;
-  uint32 tenantid = 6;
+  int32 tenantid = 6;
 }
 
 /* Overlay information */
@@ -195,7 +198,7 @@ message Tenant {
 message TenantReply {
   StatusCode status = 1;
   string token = 2;
-  uint32 tenantid = 3;
+  int32 tenantid = 3;
 }
 
 /* Remove Tenant */
