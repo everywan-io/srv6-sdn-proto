@@ -180,11 +180,7 @@ message Overlay {
   repeated Slice slices = 3;
   string type = 4;
   string mode = 5;
-<<<<<<< HEAD
-  int32 tenantid = 6;
-=======
   string tenantid = 6;
->>>>>>> 97b38133ad6fd3a8829a31c4464ceb8572bcf737
 }
 
 /* Overlay information */
@@ -202,11 +198,7 @@ message Tenant {
 message TenantReply {
   StatusCode status = 1;
   string token = 2;
-<<<<<<< HEAD
-  int32 tenantid = 3;
-=======
   string tenantid = 3;
->>>>>>> 97b38133ad6fd3a8829a31c4464ceb8572bcf737
 }
 
 /* Remove Tenant */
