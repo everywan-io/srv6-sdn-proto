@@ -39,7 +39,7 @@ message OverlayServiceRequest {
 message Intent {
   string overlayid = 1;
   string overlay_name = 2;
-  OverlayType overlay_type = 3;
+  string overlay_type = 3;
   repeated OverlaySlice slices = 4;
   string tenantid = 5;
   string tunnel = 6;
@@ -67,18 +67,8 @@ message OverlayServiceReply {
 /* OverlayData */
 message OverlayData {
   string overlay_name = 1;
-  string tenantid = 2;
+  uint32 tableid = 2;
   repeated OverlaySlice slices = 3;
-  OverlayType overlay_type = 4;
-  string tunnel_mode = 5;
-  string overlayid = 6;
-}
-
-/* Overlay type */
-enum OverlayType {
-  L2VPN = 0;
-  IPv4Overlay = 1;
-  IPv6Overlay = 2;
 }
 
 /* Tunnel type */
