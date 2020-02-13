@@ -67,8 +67,11 @@ message OverlayServiceReply {
 /* OverlayData */
 message OverlayData {
   string overlay_name = 1;
-  uint32 tableid = 2;
+  string tenantid = 2;
   repeated OverlaySlice slices = 3;
+  string overlay_type = 4;
+  string tunnel_mode = 5;
+  string overlayid = 6;
 }
 
 /* Tunnel type */
