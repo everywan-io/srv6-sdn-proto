@@ -42,7 +42,7 @@ message Intent {
   string overlay_type = 3;
   repeated OverlaySlice slices = 4;
   string tenantid = 5;
-  string tunnel = 6;
+  string tunnel_mode = 6;
   TunnelInfo tunnel_info = 7;
   //TunnelType tunnel = 8;
 }
@@ -60,7 +60,7 @@ message OverlaySlice {
 
 /* Reports the outcome of a gRPC request command */
 message OverlayServiceReply {
-  StatusCode status = 1;
+  Status status = 1;
   repeated OverlayData overlays = 2;
 }
 
@@ -189,7 +189,7 @@ message Tenant {
 
 /* Tenant Reply */
 message TenantReply {
-  StatusCode status = 1;
+  Status status = 1;
   string token = 2;
   string tenantid = 3;
 }
@@ -201,7 +201,7 @@ message RemoveTenantRequest {
 
 /* Reply message */
 message InventoryServiceReply {
-    StatusCode status = 1;
+    Status status = 1;
     DeviceInformation device_information = 2;
     TopologyInformation topology_information = 3;
     OverlayInformation overlay_information = 4;
