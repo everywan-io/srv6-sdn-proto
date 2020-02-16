@@ -27,6 +27,8 @@ service NorthboundInterface {
   rpc RemoveSliceFromOverlay (OverlayServiceRequest) returns (OverlayServiceReply) {}
   // Remove an existing overlay
   rpc RemoveOverlay (OverlayServiceRequest) returns (OverlayServiceReply) {}
+  // Unregister device
+  rpc UnregisterDevice(UnregisterDeviceRequest) returns (InventoryServiceReply) {}
 }
 
 /* Request message carrying the intent(s) */
@@ -100,7 +102,11 @@ enum TunnelType {
 
 
 
-
+/* Unregister device request */
+message UnregisterDeviceRequest {
+  string deviceid = 1;
+  string tenantid = 2;
+}
 
 
 /* Request message carrying the device configuration */
@@ -202,7 +208,7 @@ message TenantReply {
 
 /* Remove Tenant */
 message RemoveTenantRequest {
-  string token = 1;
+  string tenantid = 1;
 }
 
 /* Reply message */
