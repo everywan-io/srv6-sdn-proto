@@ -25,6 +25,8 @@ service SRv6Manager {
   rpc Update (SRv6ManagerRequest) returns (SRv6ManagerReply) {}
   // Remove operation
   rpc Remove (SRv6ManagerRequest) returns (SRv6ManagerReply) {}
+  // Shutdown device
+  rpc ShutdownDevice (SRv6ManagerRequest) returns (SRv6ManagerReply) {}
 }
 
 // The SRv6ManagerRequest message containing entities.
