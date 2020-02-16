@@ -1,14 +1,31 @@
 syntax = "proto3";
 
-/* Status codes */
-enum StatusCode {
+/* Status codes used by the Northbound interface */
+enum NbStatusCode {
+  STATUS_UNKNOWN = 0;
   STATUS_OK = 200;
   STATUS_BAD_REQUEST = 400;
+  STATUS_UNAUTHORIZED = 401;
   STATUS_INTERNAL_SERVER_ERROR = 500;
+  STATUS_SERVICE_UNAVAILABLE = 503;
+}
+
+/* Status codes used by the Southbound interface */
+enum SbStatusCode {
+  STATUS_SUCCESS = 0;
+  STATUS_INVALID_ACTION = 1;
+  STATUS_UNREACHABLE_ZEBRA = 2;
+  STATUS_INVALID_ADDRESS = 3;
+  STATUS_NO_SUCH_DEVICE = 4;
+  STATUS_UNREACHABLE_OSPF6D = 5;
+  STATUS_INTERNAL_ERROR = 6;
+  STATUS_INVALID_GRPC_REQUEST = 7;
+  STATUS_GRPC_UNAUTHORIZED = 8;
+  STATUS_GRPC_SERVICE_UNAVAILABLE = 9;
 }
 
 /* Define a status in a reply message */
 message Status {
-  StatusCode code = 1;
+  NbStatusCode code = 1;
   string reason = 2;
 }

@@ -48,7 +48,7 @@ message SRv6ManagerRequest {
 // The SRv6EPReply message containing a simple status message
 // and some optional fields
 message SRv6ManagerReply {
-  StatusCode status = 1;
+  SbStatusCode status = 1;
   repeated Interface interfaces = 2;
 }
 

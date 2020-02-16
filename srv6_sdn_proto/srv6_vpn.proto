@@ -183,8 +183,14 @@ message OverlayInformation {
 
 /* Tenant */
 message Tenant {
-  uint32 port = 1;
-  string info = 2;
+  string tenantid = 1;
+  string tenant_info = 2;
+  TenantConfiguration config = 3;
+}
+
+/* Tenant configuration */
+message TenantConfiguration {
+  int32 vxlan_port = 1;
 }
 
 /* Tenant Reply */
