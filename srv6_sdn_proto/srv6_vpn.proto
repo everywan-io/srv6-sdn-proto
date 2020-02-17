@@ -27,6 +27,8 @@ service NorthboundInterface {
   rpc RemoveSliceFromOverlay (OverlayServiceRequest) returns (OverlayServiceReply) {}
   // Remove an existing overlay
   rpc RemoveOverlay (OverlayServiceRequest) returns (OverlayServiceReply) {}
+  // Unregister device
+  rpc UnregisterDevice(UnregisterDeviceRequest) returns (InventoryServiceReply) {}
 }
 
 /* Request message carrying the intent(s) */
@@ -42,7 +44,7 @@ message Intent {
   string overlay_type = 3;
   repeated OverlaySlice slices = 4;
   string tenantid = 5;
-  string tunnel = 6;
+  string tunnel_mode = 6;
   TunnelInfo tunnel_info = 7;
   //TunnelType tunnel = 8;
 }
@@ -60,7 +62,7 @@ message OverlaySlice {
 
 /* Reports the outcome of a gRPC request command */
 message OverlayServiceReply {
-  StatusCode status = 1;
+  Status status = 1;
   repeated OverlayData overlays = 2;
 }
 
@@ -100,7 +102,11 @@ enum TunnelType {
 
 
 
-
+/* Unregister device request */
+message UnregisterDeviceRequest {
+  string deviceid = 1;
+  string tenantid = 2;
+}
 
 
 /* Request message carrying the device configuration */
@@ -183,25 +189,31 @@ message OverlayInformation {
 
 /* Tenant */
 message Tenant {
-  uint32 port = 1;
-  string info = 2;
+  string tenantid = 1;
+  string tenant_info = 2;
+  TenantConfiguration config = 3;
+}
+
+/* Tenant configuration */
+message TenantConfiguration {
+  int32 vxlan_port = 1;
 }
 
 /* Tenant Reply */
 message TenantReply {
-  StatusCode status = 1;
+  Status status = 1;
   string token = 2;
   string tenantid = 3;
 }
 
 /* Remove Tenant */
 message RemoveTenantRequest {
-  string token = 1;
+  string tenantid = 1;
 }
 
 /* Reply message */
 message InventoryServiceReply {
-    StatusCode status = 1;
+    Status status = 1;
     DeviceInformation device_information = 2;
     TopologyInformation topology_information = 3;
     OverlayInformation overlay_information = 4;

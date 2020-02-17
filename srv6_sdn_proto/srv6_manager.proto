@@ -25,6 +25,8 @@ service SRv6Manager {
   rpc Update (SRv6ManagerRequest) returns (SRv6ManagerReply) {}
   // Remove operation
   rpc Remove (SRv6ManagerRequest) returns (SRv6ManagerReply) {}
+  // Shutdown device
+  rpc ShutdownDevice (SRv6ManagerRequest) returns (SRv6ManagerReply) {}
 }
 
 // The SRv6ManagerRequest message containing entities.
@@ -48,7 +50,7 @@ message SRv6ManagerRequest {
 // The SRv6EPReply message containing a simple status message
 // and some optional fields
 message SRv6ManagerReply {
-  StatusCode status = 1;
+  SbStatusCode status = 1;
   repeated Interface interfaces = 2;
 }
 
