@@ -7,18 +7,22 @@ import "srv6_sdn_proto/status_codes.proto";
 /* RPC methods implementing a northbound interface for SRv6-VPN use cases */
 
 service NorthboundInterface {
+  // Enable device
+  rpc EnableDevice (EnableDeviceRequest) returns (NorthboundInterfaceReply) {}
+  // Disable device
+  rpc DisableDevice (DisableDeviceRequest) returns (NorthboundInterfaceReply) {}
   // Configure device
-  rpc ConfigureDevice(ConfigureDeviceRequest) returns (InventoryServiceReply) {}
+  rpc ConfigureDevice (ConfigureDeviceRequest) returns (InventoryServiceReply) {}
   // Get devices information
-  rpc GetDevices(InventoryServiceRequest) returns (InventoryServiceReply) {}
+  rpc GetDevices (InventoryServiceRequest) returns (InventoryServiceReply) {}
   // Get topology information
-  rpc GetTopologyInformation(InventoryServiceRequest) returns (InventoryServiceReply) {}
+  rpc GetTopologyInformation (InventoryServiceRequest) returns (InventoryServiceReply) {}
   // Get overlays
   rpc GetOverlays (InventoryServiceRequest) returns (OverlayServiceReply) {}
   // Configure Tenant 
   rpc ConfigureTenant(Tenant) returns (TenantReply) {}
   // Remove Tenant
-  rpc RemoveTenant(RemoveTenantRequest) returns (InventoryServiceReply) {}
+  rpc RemoveTenant (RemoveTenantRequest) returns (InventoryServiceReply) {}
   // Create a new overlay starting from an intent provided by an application on the northbound interface
   rpc CreateOverlay (OverlayServiceRequest) returns (OverlayServiceReply) {}
   // Add a slice to an existing overlay
@@ -28,7 +32,21 @@ service NorthboundInterface {
   // Remove an existing overlay
   rpc RemoveOverlay (OverlayServiceRequest) returns (OverlayServiceReply) {}
   // Unregister device
-  rpc UnregisterDevice(UnregisterDeviceRequest) returns (InventoryServiceReply) {}
+  rpc UnregisterDevice (UnregisterDeviceRequest) returns (InventoryServiceReply) {}
+}
+
+/* EnableDeviceRequest */
+message EnableDeviceRequest {
+	repeated Router devices = 1;
+}
+/* DisableDeviceRequest */
+message DisableDeviceRequest {
+	repeated Router devices = 1;
+}
+
+/* Generic reply for the RPC message */
+message NorthboundInterfaceReply {
+  Status status = 1;
 }
 
 /* Request message carrying the intent(s) */
@@ -150,8 +168,10 @@ message Router {
     string mgmtip = 6;
     string name = 7;
     string description = 8;
-    string status = 9;
-    string tenantid = 10;
+    bool connected = 9;
+    bool configured = 10;
+    bool enabled = 11;
+    string tenantid = 12;
 }
 
 /* Link */
