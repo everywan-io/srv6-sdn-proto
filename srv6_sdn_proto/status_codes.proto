@@ -22,6 +22,8 @@ enum SbStatusCode {
   STATUS_INVALID_GRPC_REQUEST = 7;
   STATUS_GRPC_UNAUTHORIZED = 8;
   STATUS_GRPC_SERVICE_UNAVAILABLE = 9;
+  STATUS_FILE_EXISTS = 10;
+  STATUS_NO_SUCH_PROCESS = 11;
 }
 
 /* Define a status in a reply message */
