@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+// The Path message encodes a path request
+message Device {
+  // Device name
+  string name = 1;
+  // Routing table associated to the VRF
+  int32 table = 2;
+  // Interfaces
+  repeated string interfaces = 3;
+  // Operation
+  string op = 4;
+}

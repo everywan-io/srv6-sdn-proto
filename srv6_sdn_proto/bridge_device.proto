@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+import "srv6_sdn_proto/device.proto";
+
+// The BridgeDeviceRequest message containing a number of devices.
+message BridgeDeviceRequest {
+  repeated Device devices = 1;
+}
