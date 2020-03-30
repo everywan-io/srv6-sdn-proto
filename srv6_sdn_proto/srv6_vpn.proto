@@ -65,6 +65,8 @@ message Intent {
   string tunnel_mode = 6;
   TunnelInfo tunnel_info = 7;
   //TunnelType tunnel = 8;
+  string topo_type = 8;
+  string hub_id = 9;
 }
 
 message TunnelInfo {
