@@ -94,6 +94,8 @@ message OverlayData {
   string overlay_type = 4;
   string tunnel_mode = 5;
   string overlayid = 6;
+  string topo_type = 7;
+  string hub = 8;
 }
 
 /* Tunnel type */
