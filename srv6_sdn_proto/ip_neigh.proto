@@ -15,4 +15,6 @@ message Neigh {
   string lladdr = 3;
   // Device
   string device = 4;
+  // Proxy NDP address
+  bool proxy = 5;
 }
