@@ -33,6 +33,8 @@ service NorthboundInterface {
   rpc RemoveOverlay (OverlayServiceRequest) returns (OverlayServiceReply) {}
   // Unregister device
   rpc UnregisterDevice (UnregisterDeviceRequest) returns (InventoryServiceReply) {}
+  // Retrieve SID lists available between two edge devices
+  rpc GetSIDLists (GetSIDListsRequest) returns (GetSIDListsReply) {}
 }
 
 /* EnableDeviceRequest */
@@ -243,4 +245,23 @@ message InventoryServiceReply {
     DeviceInformation device_information = 2;
     TopologyInformation topology_information = 3;
     OverlayInformation overlay_information = 4;
+}
+
+message GetSIDListsRequest {
+    string ingress_deviceid = 1;
+    string egress_deviceid = 2;
+    string tenantid = 3;
+}
+
+message GetSIDListsReply {
+    Status status = 1;
+    repeated SIDListInformation sid_lists = 2;
+}
+
+message SIDListInformation {
+    string overlayid = 1;
+    string overlay_name = 2;
+    repeated string direct_sid_list = 3;
+    repeated string return_sid_list = 4;
+    string tenantid = 5;
 }
