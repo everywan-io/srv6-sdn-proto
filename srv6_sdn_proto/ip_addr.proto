@@ -3,6 +3,7 @@ syntax = "proto3";
 // The IPAddrRequest message containing a number of addresses.
 message IPAddrRequest {
   repeated Addr addrs = 1;
+  bool ignore_errors = 2;
 }
 
 // The Addr message encodes a addr request
