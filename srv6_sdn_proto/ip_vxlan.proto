@@ -15,4 +15,6 @@ message Vxlan {
   uint32 vxlan_id = 3;
   // vxlan destinantion port 
   uint32 vxlan_port = 4;
+  // Remote IP address
+  string vxlan_group = 5;
 }
