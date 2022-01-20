@@ -9,6 +9,7 @@ import "srv6_sdn_proto/ip_route.proto";
 import "srv6_sdn_proto/ip_rule.proto";
 import "srv6_sdn_proto/vrf_device.proto";
 import "srv6_sdn_proto/interface.proto";
+import "srv6_sdn_proto/ip_tunnel_interface.proto";
 import "srv6_sdn_proto/gre_interface.proto";
 import "srv6_sdn_proto/ip_neigh.proto";
 import "srv6_sdn_proto/ip_vxlan.proto";
@@ -44,6 +45,7 @@ message SRv6ManagerRequest {
     IPNeighRequest ipneigh_request = 10;
     IPVxLANRequest ipvxlan_request = 11;
     IPfdbentriesRequest fdbentries_request = 12;
+    IPTunnelRequest iptunnel_request = 13;
   }
 }
 
@@ -67,4 +69,5 @@ enum EntityType {
   IPNeigh = 8;
   IPVxlan = 9;
   IPfdbentries = 10;
+  IPTunnel = 11;
 }
