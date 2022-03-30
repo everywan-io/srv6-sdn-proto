@@ -224,7 +224,7 @@ message Tenant {
 
 /* Tenant configuration */
 message TenantConfiguration {
-  int32 vxlan_port = 1;
+  uint32 vxlan_port = 1;
 }
 
 /* Tenant Reply */
